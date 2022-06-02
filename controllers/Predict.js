@@ -15,8 +15,6 @@ const predictMain = async (req, res) => {
       });
   }
 
-
-
   const findSatwa = await Satwa.findOne({
     where: {
       nama: randomSatwa.nama
