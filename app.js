@@ -29,7 +29,8 @@ app.use(cors({
       return callback(new Error(message), false);
     }
     return callback(null, true);
-  }
+  },
+  exposedHeaders: ['set-cookie']
 }));
 app.use(logger('dev'));
 app.use(express.json());
