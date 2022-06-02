@@ -15,7 +15,6 @@ var satwaGambarRouter = require('./routes/satwaGambar');
 var predictRouter = require('./routes/predict');
 
 var app = express();
-app.use(cookieParser());
 
 let whitelist = ['http://localhost:3000', 'http://localhost'];
 
@@ -35,6 +34,7 @@ app.use(cors({
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', authRouter);
