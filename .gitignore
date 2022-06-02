@@ -1,0 +1,10 @@
+# Ignore node_modules folder
+node_modules
+
+# Ignore environment variable config
+.env
+.env.prod
+
+# Ignore Docker files
+.dockerignore
+Dockerfile
