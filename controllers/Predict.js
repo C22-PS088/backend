@@ -3,7 +3,7 @@ const axios = require('axios');
 const { Satwa, Satwa_gambar, Satwa_donasi } = require('../models');
 
 const predictMain = async (req, res) => {
-  const getRandom = await axios.post('http://localhost:3001/predict/random');
+  const getRandom = await axios.post('http://34.101.145.236:8080/predict/random');
   const randomSatwa = getRandom.data;
 
   if (randomSatwa.status) {
