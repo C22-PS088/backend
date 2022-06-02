@@ -36,42 +36,42 @@ const predictRandom = async (req, res) => {
     nama: 'Macan',
     nama_saintifik: 'Panthera Pardus Melas',
     lokasi: '',
-    populasi: null,
+    populasi: '',
     funfact: ''
   },
   {
     nama: 'Beruang Madu',
     nama_saintifik: 'Helarctos Malayanus',
     lokasi: '',
-    populasi: null,
+    populasi: '',
     funfact: ''
   },
   {
     nama: 'Gajah Asia',
     nama_saintifik: '',
     lokasi: '',
-    populasi: null,
+    populasi: '',
     funfact: ''
   },
   {
     nama: 'Burung',
     nama_saintifik: 'Buceroa Rhinoceros',
     lokasi: '',
-    populasi: null,
+    populasi: '',
     funfact: ''
   },
   {
     nama: 'Tapir',
     nama_saintifik: 'Tapirus Indicus',
     lokasi: '',
-    populasi: null,
+    populasi: '',
     funfact: ''
   },
   {
     nama: 'Bekantan',
     nama_saintifik: 'Nasalis Larvatus',
     lokasi: '',
-    populasi: null,
+    populasi: '',
     funfact: ''
   },
   {
