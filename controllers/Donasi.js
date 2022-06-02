@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Validator = require('fastest-validator');
 const { Storage } = require('@google-cloud/storage');
 var path = require('path');
