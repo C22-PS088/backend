@@ -142,6 +142,12 @@ const deleteSatwa = async (req, res) => {
       const gambar_old = satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
 
       try {
+        await Satwa_gambar.destroy({
+          where: {
+            id: satwa_gambar.id
+          }
+        });
+
         await bucket.file(gambar_old).delete();
       } catch (error) {
         console.log(error);
