@@ -80,7 +80,7 @@ const addDonasi = async (req, res) => {
 
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
       return res
-        .status(404)
+        .status(400)
         .json({
           status: 'fail',
           message: 'Hanya dapat menggunakan file gambar (.png, .jpg atau .jpeg)'
@@ -169,7 +169,7 @@ const updateDonasi = async (req, res) => {
 
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
       return res
-        .status(404)
+        .status(400)
         .json({
           status: 'fail',
           message: 'Hanya dapat menggunakan file gambar (.png, .jpg atau .jpeg)'
@@ -230,6 +230,16 @@ const deleteDonasi = async (req, res) => {
         status: 'fail',
         message: 'Data donasi tidak ditemukan'
       });
+  }
+
+  if (donasi.gambar) {
+    const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');;
+
+    try {
+      await bucket.file(gambar_old).delete();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   await donasi.destroy();
