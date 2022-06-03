@@ -16,7 +16,7 @@ const bucket = storage.bucket(process.env.GCS_BUCKET);
 
 const uuidv1 = uuid.v1;
 
-const { Donasi } = require('../models');
+const { Donasi, Satwa_donasi } = require('../models');
 
 const v = new Validator();
 
@@ -231,6 +231,12 @@ const deleteDonasi = async (req, res) => {
         message: 'Data donasi tidak ditemukan'
       });
   }
+
+  await Satwa_donasi.destroy({
+    where: {
+      DonasiId: donasi.id
+    }
+  });
 
   if (donasi.gambar) {
     const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');

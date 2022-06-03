@@ -12,7 +12,7 @@ const storage = new Storage({
 const bucket = storage.bucket(process.env.GCS_BUCKET);
 
 
-const { Satwa, Satwa_gambar } = require('../models');
+const { Satwa, Satwa_donasi, Satwa_gambar } = require('../models');
 
 const v = new Validator();
 
@@ -146,6 +146,12 @@ const deleteSatwa = async (req, res) => {
         message: 'Data satwa tidak ditemukan'
       });
   }
+
+  await Satwa_donasi.destroy({
+    where: {
+      SatwaId: satwa.id
+    }
+  });
 
   if (satwa.Satwa_gambars.length !== 0) {
     const satwa_gambars = satwa.Satwa_gambars;
