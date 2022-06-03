@@ -38,7 +38,7 @@ const addSatwa = async (req, res) => {
     nama: 'string',
     nama_saintifik: 'string|optional',
     lokasi: 'string|optional',
-    populasi: 'string|integer|optional',
+    populasi: 'string|optional',
     funfact: 'string|optional',
   }
 
@@ -86,7 +86,7 @@ const updateSatwa = async (req, res) => {
     nama: 'string|optional',
     nama_saintifik: 'string|optional',
     lokasi: 'string|optional',
-    populasi: 'string|integer|optional',
+    populasi: 'string|optional',
     funfact: 'string|optional',
   }
 

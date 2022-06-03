@@ -20,19 +20,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       lokasi: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       kontak: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       website: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       rekening: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

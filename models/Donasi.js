@@ -17,19 +17,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     lokasi: {
-      allowNull: false,
       type: DataTypes.STRING
     },
     kontak: {
-      allowNull: false,
       type: DataTypes.STRING
     },
     website: {
-      allowNull: false,
       type: DataTypes.STRING
     },
     rekening: {
-      allowNull: false,
       type: DataTypes.STRING
     },
     createdAt: {

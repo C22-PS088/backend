@@ -46,10 +46,10 @@ const addDonasi = async (req, res) => {
   const schema = {
     nama: 'string',
     deskripsi: 'string|optional',
-    lokasi: 'string',
-    kontak: 'string',
-    website: 'string',
-    rekening: 'string'
+    lokasi: 'string|optional',
+    kontak: 'string|optional',
+    website: 'string|optional',
+    rekening: 'string|optional'
   }
 
   const donasi_detail = JSON.parse(req.body.data);
@@ -63,14 +63,10 @@ const addDonasi = async (req, res) => {
   }
 
   const {
-    nama,
-    lokasi,
-    kontak,
-    website,
-    rekening
+    nama
   } = donasi_detail;
 
-  if (nama === "" || lokasi === "" || kontak === "" || website === "" || rekening === "") {
+  if (nama === "") {
     return res
       .status(400)
       .json({
@@ -155,14 +151,10 @@ const updateDonasi = async (req, res) => {
   }
 
   const {
-    nama,
-    lokasi,
-    kontak,
-    website,
-    rekening
+    nama
   } = donasi_detail;
 
-  if (nama === "" || lokasi === "" || kontak === "" || website === "" || rekening === "") {
+  if (nama === "") {
     return res
       .status(400)
       .json({

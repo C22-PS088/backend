@@ -42,7 +42,7 @@ module.exports = {
     //   nama_saintifik: 'Satwa 1 saintifik',
     //   lokasi: 'Malang',
     //   populasi: null,
-    //   funfact: null,
+    //   funfact: '',
     //   createdAt: new Date(),
     //   updatedAt: new Date()
     // },
@@ -51,7 +51,7 @@ module.exports = {
     //   nama_saintifik: 'Satwa 2 saintifik',
     //   lokasi: 'Ngalam',
     //   populasi: '49',
-    //   funfact: null,
+    //   funfact: '',
     //   createdAt: new Date(),
     //   updatedAt: new Date()
     // },
@@ -60,7 +60,7 @@ module.exports = {
     //   nama_saintifik: 'Satwa 3 saintifik',
     //   lokasi: 'Malang',
     //   populasi: '77',
-    //   funfact: null,
+    //   funfact: '',
     //   createdAt: new Date(),
     //   updatedAt: new Date()
     // }]);
