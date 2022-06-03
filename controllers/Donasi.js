@@ -104,6 +104,7 @@ const addDonasi = async (req, res) => {
       const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
 
       donasi_detail.gambar = publicUrl;
+
       const donasi = await Donasi.create(donasi_detail);
 
       res.json(donasi);
@@ -192,6 +193,17 @@ const updateDonasi = async (req, res) => {
       const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
 
       donasi_detail.gambar = publicUrl;
+
+      if (donasi.gambar) {
+        const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');;
+
+        try {
+          await bucket.file(gambar_old).delete();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       donasi = await donasi.update(donasi_detail);
 
       res.json(donasi);
