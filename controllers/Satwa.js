@@ -119,7 +119,12 @@ const updateSatwa = async (req, res) => {
 const deleteSatwa = async (req, res) => {
   const id = req.params.id;
 
-  const satwa = await Satwa.findByPk(id);
+  const satwa = await Satwa.findOne({
+    where: {
+      id: id
+    },
+    include: Satwa_gambar
+  });
 
   if (!satwa) {
     return res
