@@ -1,4 +1,16 @@
 const Validator = require('fastest-validator');
+const { Storage } = require('@google-cloud/storage');
+
+const storage = new Storage({
+  projectId: process.env.GCLOUD_PROJECT,
+  credentials: {
+    client_email: process.env.GCLOUD_CLIENT_EMAIL,
+    private_key: process.env.GCLOUD_PRIVATE_KEY
+  }
+});
+
+const bucket = storage.bucket(process.env.GCS_BUCKET);
+
 
 const { Satwa, Satwa_gambar } = require('../models');
 
@@ -139,6 +151,8 @@ const deleteSatwa = async (req, res) => {
     const satwa_gambars = satwa.Satwa_gambars;
 
     for (let satwa_gambar of satwa_gambars) {
+      const gambar_old = satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
+
       try {
         await Satwa_gambar.destroy({
           where: {
@@ -146,7 +160,7 @@ const deleteSatwa = async (req, res) => {
           }
         });
 
-        await bucket.file(satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '')).delete();
+        await bucket.file(gambar_old).delete();
       } catch (error) {
         console.log(error);
       }
