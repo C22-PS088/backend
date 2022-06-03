@@ -139,8 +139,6 @@ const deleteSatwa = async (req, res) => {
     const satwa_gambars = satwa.Satwa_gambars;
 
     for (let satwa_gambar of satwa_gambars) {
-      const gambar_old = satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
-
       try {
         await Satwa_gambar.destroy({
           where: {
@@ -148,7 +146,7 @@ const deleteSatwa = async (req, res) => {
           }
         });
 
-        await bucket.file(gambar_old).delete();
+        await bucket.file(satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '')).delete();
       } catch (error) {
         console.log(error);
       }
