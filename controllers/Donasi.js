@@ -195,7 +195,7 @@ const updateDonasi = async (req, res) => {
       donasi_detail.gambar = publicUrl;
 
       if (donasi.gambar) {
-        const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');;
+        const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
 
         try {
           await bucket.file(gambar_old).delete();
@@ -233,7 +233,7 @@ const deleteDonasi = async (req, res) => {
   }
 
   if (donasi.gambar) {
-    const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');;
+    const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
 
     try {
       await bucket.file(gambar_old).delete();

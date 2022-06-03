@@ -178,7 +178,7 @@ const deleteSatwaGambar = async (req, res) => {
   }
 
   if (satwa_gambar.gambar) {
-    const gambar_old = satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');;
+    const gambar_old = satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
 
     try {
       await bucket.file(gambar_old).delete();

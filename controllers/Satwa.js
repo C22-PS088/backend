@@ -130,6 +130,20 @@ const deleteSatwa = async (req, res) => {
       });
   }
 
+  if (satwa.Satwa_gambars.length !== 0) {
+    const satwa_gambars = satwa.Satwa_gambars;
+
+    for (let satwa_gambar of satwa_gambars) {
+      const gambar_old = satwa_gambar.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
+
+      try {
+        await bucket.file(gambar_old).delete();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
   await satwa.destroy();
 
   res
