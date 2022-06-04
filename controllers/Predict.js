@@ -64,12 +64,26 @@ const predictMain = async (req, res) => {
     blobStream.on('finish', async () => {
       const filename = blob.name.replaceAll('predict_uploads/', '');;
 
-      const getPrediction = await axios.post('https://predict-z7avufw6aq-et.a.run.app', {
-        filename: filename
-      });
-      const predictedSatwa = getPrediction.data;
+      try {
+        const getPrediction = await axios.post('https://predict-z7avufw6aq-et.a.run.app', {
+          filename: filename
+        });
+        const predictedSatwa = getPrediction.data;
 
-      if (predictedSatwa.message && predictedSatwa.message === 'Hewan tidak terdeteksi') {
+        const findSatwa = await Satwa.findOne({
+          where: {
+            nama: predictedSatwa.nama
+          }
+        });
+
+        if (!findSatwa) {
+          const satwa = await Satwa.create(predictedSatwa);
+          return res.json(satwa);
+        }
+
+        res.json(findSatwa);
+      } catch (error) {
+        console.log(error);
         return res
           .status(400)
           .json({
@@ -77,19 +91,6 @@ const predictMain = async (req, res) => {
             message: 'Tidak terdeteksi'
           });
       }
-
-      const findSatwa = await Satwa.findOne({
-        where: {
-          nama: predictedSatwa.nama
-        }
-      });
-
-      if (!findSatwa) {
-        const satwa = await Satwa.create(predictedSatwa);
-        return res.json(satwa);
-      }
-
-      res.json(findSatwa);
     });
 
     blobStream.end(req.file.buffer);
