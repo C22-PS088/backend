@@ -45,6 +45,37 @@ const getSatwaById = async (req, res) => {
   res.json(satwa);
 }
 
+const getSatwaByIdV2 = async (req, res) => {
+  const id = req.params.id;
+
+  const satwa = await Satwa.findByPk(id);
+
+  if (!satwa) {
+    return res
+      .status(404)
+      .json({
+        status: 'fail',
+        message: 'Data satwa tidak ditemukan'
+      });
+  }
+
+  const gambar = await Satwa_gambar.findOne({
+    where: {
+      SatwaId: id
+    }
+  })
+
+  const satwaReturn = JSON.parse(JSON.stringify(satwa));
+
+  if (gambar) {
+    satwaReturn.gambar = gambar.gambar;
+  } else {
+    satwaReturn.gambar = null;
+  }
+
+  res.json(satwaReturn);
+}
+
 const addSatwa = async (req, res) => {
   const schema = {
     nama: 'string',
@@ -186,6 +217,7 @@ const deleteSatwa = async (req, res) => {
 module.exports = {
   getAllSatwa,
   getSatwaById,
+  getSatwaByIdV2,
   addSatwa,
   updateSatwa,
   deleteSatwa
