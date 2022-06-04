@@ -11,7 +11,7 @@ const multer = Multer({
   storage: Multer.memoryStorage()
 });
 
-router.post('/', predictMain);
+router.post('/', multer.single('file'), predictMain);
 router.post('/random', predictRandom);
 
 module.exports = router;
