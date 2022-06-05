@@ -70,6 +70,37 @@ const getSatwaDonasiBySatwa = async (req, res) => {
   res.json(satwa_donasi);
 }
 
+const getSatwaDonasiBySatwaV2 = async (req, res) => {
+  const id = req.params.id;
+
+  const satwa = await Satwa.findByPk(id);
+
+  if (!satwa) {
+    return res
+      .status(404)
+      .json({
+        status: 'fail',
+        message: 'Data satwa tidak ditemukan'
+      });
+  }
+
+  const satwa_donasi = await Satwa_donasi.findAll({
+    where: {
+      SatwaId: id
+    },
+    attributes: [],
+    include: [{
+      model: Donasi
+    }]
+  });
+
+  const donasi = satwa_donasi.map((satwa_donasi) => {
+    return satwa_donasi.Donasi;
+  });
+
+  res.json(donasi);
+}
+
 const getSatwaDonasiByDonasi = async (req, res) => {
   const id = req.params.id;
 
@@ -284,6 +315,7 @@ module.exports = {
   getAllSatwaDonasi,
   getSatwaDonasiById,
   getSatwaDonasiBySatwa,
+  getSatwaDonasiBySatwaV2,
   getSatwaDonasiByDonasi,
   addSatwaDonasi,
   updateSatwaDonasi,

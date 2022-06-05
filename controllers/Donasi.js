@@ -75,10 +75,10 @@ const addDonasi = async (req, res) => {
       });
   }
 
-  if (req.file) {
-    const ext = path.extname(req.file.originalname).toLowerCase();
+  if (req.files.logo) {
+    const ext_logo = path.extname(req.files.logo[0].originalname).toLowerCase();
 
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+    if (ext_logo !== '.png' && ext_logo !== '.jpg' && ext_logo !== '.jpeg') {
       return res
         .status(400)
         .json({
@@ -87,35 +87,55 @@ const addDonasi = async (req, res) => {
         });
     }
 
-    const newFilename = `${uuidv1()}-${req.file.originalname}`;
-    const blob = bucket.file(newFilename);
-    const blobStream = blob.createWriteStream();
+    const newFilename_logo = `${uuidv1()}-${req.files.logo[0].originalname}`;
+    const blob_logo = bucket.file(newFilename_logo);
+    const blobStream_logo = blob_logo.createWriteStream();
 
-    blobStream.on('error', (error) => {
+    blobStream_logo.on('error', (error) => {
+      console.log(error);
+    });
+
+    blobStream_logo.on('finish', async () => {
+      console.log('success');
+    });
+
+    blobStream_logo.end(req.files.logo[0].buffer);
+
+    donasi_detail.logo = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob_logo.name}`;
+  }
+
+  if (req.files.gambar) {
+    const ext_gambar = path.extname(req.files.gambar[0].originalname).toLowerCase();
+
+    if (ext_gambar !== '.png' && ext_gambar !== '.jpg' && ext_gambar !== '.jpeg') {
       return res
         .status(400)
         .json({
           status: 'fail',
-          message: error
+          message: 'Hanya dapat menggunakan file gambar (.png, .jpg atau .jpeg)'
         });
+    }
+
+    const newFilename_gambar = `${uuidv1()}-${req.files.gambar[0].originalname}`;
+    const blob_gambar = bucket.file(newFilename_gambar);
+    const blobStream_gambar = blob_gambar.createWriteStream();
+
+    blobStream_gambar.on('error', (error) => {
+      console.log(error);
     });
 
-    blobStream.on('finish', async () => {
-      const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
-
-      donasi_detail.gambar = publicUrl;
-
-      const donasi = await Donasi.create(donasi_detail);
-
-      res.json(donasi);
+    blobStream_gambar.on('finish', async () => {
+      console.log('success');
     });
 
-    blobStream.end(req.file.buffer);
-  } else {
-    const donasi = await Donasi.create(donasi_detail);
+    blobStream_gambar.end(req.files.gambar[0].buffer);
 
-    res.json(donasi);
+    donasi_detail.gambar = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob_gambar.name}`;
   }
+
+  const donasi = await Donasi.create(donasi_detail);
+
+  res.json(donasi);
 }
 
 const updateDonasi = async (req, res) => {
@@ -164,10 +184,10 @@ const updateDonasi = async (req, res) => {
       });
   }
 
-  if (req.file) {
-    const ext = path.extname(req.file.originalname).toLowerCase();
+  if (req.files.logo) {
+    const ext_logo = path.extname(req.files.logo[0].originalname).toLowerCase();
 
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+    if (ext_logo !== '.png' && ext_logo !== '.jpg' && ext_logo !== '.jpeg') {
       return res
         .status(400)
         .json({
@@ -176,46 +196,79 @@ const updateDonasi = async (req, res) => {
         });
     }
 
-    const newFilename = `${uuidv1()}-${req.file.originalname}`;
-    const blob = bucket.file(newFilename);
-    const blobStream = blob.createWriteStream();
+    const newFilename_logo = `${uuidv1()}-${req.files.logo[0].originalname}`;
+    const blob_logo = bucket.file(newFilename_logo);
+    const blobStream_logo = blob_logo.createWriteStream();
 
-    blobStream.on('error', (error) => {
+    blobStream_logo.on('error', (error) => {
+      console.log(error)
+    });
+
+    blobStream_logo.on('finish', async () => {
+      console.log('success');
+    });
+
+    blobStream_logo.end(req.files.logo[0].buffer);
+
+    if (donasi.logo) {
+      const logo_old = donasi.logo.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
+
+      try {
+        await bucket.file(logo_old).delete();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    donasi_detail.logo = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob_logo.name}`;
+  } else {
+    donasi_detail.logo = donasi.logo;
+  }
+
+  if (req.files.gambar) {
+    const ext_gambar = path.extname(req.files.gambar[0].originalname).toLowerCase();
+
+    if (ext_gambar !== '.png' && ext_gambar !== '.jpg' && ext_gambar !== '.jpeg') {
       return res
         .status(400)
         .json({
           status: 'fail',
-          message: error
+          message: 'Hanya dapat menggunakan file gambar (.png, .jpg atau .jpeg)'
         });
+    }
+
+    const newFilename_gambar = `${uuidv1()}-${req.files.gambar[0].originalname}`;
+    const blob_gambar = bucket.file(newFilename_gambar);
+    const blobStream_gambar = blob_gambar.createWriteStream();
+
+    blobStream_gambar.on('error', (error) => {
+      console.log(error);
     });
 
-    blobStream.on('finish', async () => {
-      const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
+    blobStream_gambar.on('finish', async () => {
+      console.log('success');
+    });
 
-      donasi_detail.gambar = publicUrl;
+    blobStream_gambar.end(req.files.gambar[0].buffer);
 
-      if (donasi.gambar) {
-        const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
+    if (donasi.gambar) {
+      const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
 
-        try {
-          await bucket.file(gambar_old).delete();
-        } catch (error) {
-          console.log(error);
-        }
+      try {
+        await bucket.file(gambar_old).delete();
+      } catch (error) {
+        console.log(error);
       }
+    }
 
-      donasi = await donasi.update(donasi_detail);
-
-      res.json(donasi);
-    });
-
-    blobStream.end(req.file.buffer);
+    donasi_detail.gambar = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob_gambar.name}`;
   } else {
     donasi_detail.gambar = donasi.gambar;
-    donasi = await donasi.update(donasi_detail);
-
-    res.json(donasi);
   }
+
+  donasi = await donasi.update(donasi_detail);
+
+  res.json(donasi);
 }
 
 const deleteDonasi = async (req, res) => {
@@ -237,6 +290,16 @@ const deleteDonasi = async (req, res) => {
       DonasiId: donasi.id
     }
   });
+
+  if (donasi.logo) {
+    const logo_old = donasi.logo.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
+
+    try {
+      await bucket.file(logo_old).delete();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   if (donasi.gambar) {
     const gambar_old = donasi.gambar.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');

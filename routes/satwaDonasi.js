@@ -5,6 +5,7 @@ const {
   getAllSatwaDonasi,
   getSatwaDonasiById,
   getSatwaDonasiBySatwa,
+  getSatwaDonasiBySatwaV2,
   getSatwaDonasiByDonasi,
   addSatwaDonasi,
   updateSatwaDonasi,
@@ -14,6 +15,7 @@ const {
 router.get('/', getAllSatwaDonasi);
 router.get('/:id', getSatwaDonasiById);
 router.get('/satwa/:id', getSatwaDonasiBySatwa);
+router.get('/v2/satwa/:id', getSatwaDonasiBySatwaV2);
 router.get('/donasi/:id', getSatwaDonasiByDonasi);
 router.post('/', addSatwaDonasi);
 router.put('/:id', updateSatwaDonasi);

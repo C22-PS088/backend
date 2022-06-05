@@ -18,6 +18,7 @@ module.exports = {
     // await queryInterface.bulkInsert('donasi', [{
     //   nama: 'Donasi 1',
     //   deskripsi: 'Deskripsi donasi 1',
+    //   logo: null,
     //   gambar: null,
     //   lokasi: 'Lokasi donasi 1',
     //   kontak: 'Kontak donasi 1',
@@ -28,6 +29,7 @@ module.exports = {
     // }, {
     //   nama: 'Donasi 2',
     //   deskripsi: 'Deskripsi donasi 2',
+    //   logo: null,
     //   gambar: null,
     //   lokasi: 'Lokasi donasi 2',
     //   kontak: 'Kontak donasi 2',

@@ -19,8 +19,8 @@ const multer = Multer({
 
 router.get('/', getAllDonasi);
 router.get('/:id', getDonasiById);
-router.post('/', multer.single('gambar'), addDonasi);
-router.put('/:id', multer.single('gambar'), updateDonasi);
+router.post('/', multer.fields([{ name: 'logo', maxCount: 1 }, { name: 'gambar', maxCount: 1 }]), addDonasi);
+router.put('/:id', multer.fields([{ name: 'logo', maxCount: 1 }, { name: 'gambar', maxCount: 1 }]), updateDonasi);
 router.delete('/:id', deleteDonasi);
 
 module.exports = router;

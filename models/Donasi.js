@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     deskripsi: {
       type: DataTypes.TEXT
     },
+    logo: {
+      type: DataTypes.STRING
+    },
     gambar: {
       type: DataTypes.STRING
     },

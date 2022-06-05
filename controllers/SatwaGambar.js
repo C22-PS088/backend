@@ -135,24 +135,19 @@ const addSatwaGambar = async (req, res) => {
     const blobStream = blob.createWriteStream();
 
     blobStream.on('error', (error) => {
-      return res
-        .status(400)
-        .json({
-          status: 'fail',
-          message: error
-        });
+      console.log(error);
     });
 
     blobStream.on('finish', async () => {
-      const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
-
-      satwa_gambar_detail.gambar = publicUrl;
-      const satwa_gambar = await Satwa_gambar.create(satwa_gambar_detail);
-
-      res.json(satwa_gambar);
+      console.log('success');
     });
 
     blobStream.end(req.file.buffer);
+
+    satwa_gambar_detail.gambar = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
+    const satwa_gambar = await Satwa_gambar.create(satwa_gambar_detail);
+
+    res.json(satwa_gambar);
   } else {
     return res
       .status(400)
