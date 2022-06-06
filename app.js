@@ -16,7 +16,7 @@ var predictRouter = require('./routes/predict');
 
 var app = express();
 
-let whitelist = ['http://localhost:3000', 'http://localhost', 'http://34.101.145.236:3000'];
+let whitelist = ['http://localhost:3000', 'http://localhost', 'http://35.219.90.56:3000'];
 
 app.use(cors({
   credentials: true,
