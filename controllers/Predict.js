@@ -65,7 +65,7 @@ const predictMain = async (req, res) => {
       const filename = blob.name.replaceAll('predict_uploads/', '');;
 
       try {
-        const getPrediction = await axios.post('https://predict-z7avufw6aq-et.a.run.app', {
+        const getPrediction = await axios.post(process.env.API_PREDICT_HOST, {
           filename: filename
         });
         const predictedSatwa = getPrediction.data;
