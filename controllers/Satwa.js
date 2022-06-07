@@ -111,8 +111,8 @@ const addSatwa = async (req, res) => {
       });
   }
 
-  if (req.files.gambar_lokasi) {
-    const ext_gambar_lokasi = path.extname(req.files.gambar_lokasi[0].originalname).toLowerCase();
+  if (req.file) {
+    const ext_gambar_lokasi = path.extname(req.file.originalname).toLowerCase();
 
     if (ext_gambar_lokasi !== '.png' && ext_gambar_lokasi !== '.jpg' && ext_gambar_lokasi !== '.jpeg') {
       return res
@@ -123,7 +123,7 @@ const addSatwa = async (req, res) => {
         });
     }
 
-    const newFilename_gambar_lokasi = `${uuidv1()}-${req.files.gambar_lokasi[0].originalname}`;
+    const newFilename_gambar_lokasi = `${uuidv1()}-${req.file.originalname}`;
     const blob_gambar_lokasi = bucket.file(newFilename_gambar_lokasi);
     const blobStream_gambar_lokasi = blob_gambar_lokasi.createWriteStream();
 
@@ -135,7 +135,7 @@ const addSatwa = async (req, res) => {
       console.log('success');
     });
 
-    blobStream_gambar_lokasi.end(req.files.gambar_lokasi[0].buffer);
+    blobStream_gambar_lokasi.end(req.file.buffer);
 
     satwa_detail.gambar_lokasi = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob_gambar_lokasi.name}`;
   }
@@ -190,8 +190,8 @@ const updateSatwa = async (req, res) => {
       });
   }
 
-  if (req.files.gambar_lokasi) {
-    const ext_gambar_lokasi = path.extname(req.files.gambar_lokasi[0].originalname).toLowerCase();
+  if (req.file) {
+    const ext_gambar_lokasi = path.extname(req.file.originalname).toLowerCase();
 
     if (ext_gambar_lokasi !== '.png' && ext_gambar_lokasi !== '.jpg' && ext_gambar_lokasi !== '.jpeg') {
       return res
@@ -202,7 +202,7 @@ const updateSatwa = async (req, res) => {
         });
     }
 
-    const newFilename_gambar_lokasi = `${uuidv1()}-${req.files.gambar_lokasi[0].originalname}`;
+    const newFilename_gambar_lokasi = `${uuidv1()}-${req.file.originalname}`;
     const blob_gambar_lokasi = bucket.file(newFilename_gambar_lokasi);
     const blobStream_gambar_lokasi = blob_gambar_lokasi.createWriteStream();
 
@@ -214,7 +214,7 @@ const updateSatwa = async (req, res) => {
       console.log('success');
     });
 
-    blobStream_gambar_lokasi.end(req.files.gambar_lokasi[0].buffer);
+    blobStream_gambar_lokasi.end(req.file.buffer);
 
     if (satwa.gambar_lokasi) {
       const gambar_lokasi_old = satwa.gambar_lokasi.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
