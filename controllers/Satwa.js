@@ -217,7 +217,7 @@ const updateSatwa = async (req, res) => {
     blobStream_gambar_lokasi.end(req.files.gambar_lokasi[0].buffer);
 
     if (satwa.gambar_lokasi) {
-      const gambar_lokasi_old = donasi.gambar_lokasi.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
+      const gambar_lokasi_old = satwa.gambar_lokasi.replaceAll(`https://storage.googleapis.com/${process.env.GCS_BUCKET}/`, '');
 
       try {
         await bucket.file(gambar_lokasi_old).delete();
