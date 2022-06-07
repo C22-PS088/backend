@@ -19,6 +19,9 @@ module.exports = {
       lokasi: {
         type: Sequelize.STRING
       },
+      gambar_lokasi: {
+        type: Sequelize.STRING
+      },
       populasi: {
         type: Sequelize.STRING
       },

@@ -1,4 +1,5 @@
 var express = require('express');
+const Multer = require('multer');
 var router = express.Router();
 
 const {
@@ -10,11 +11,18 @@ const {
   deleteSatwa
 } = require('../controllers/Satwa');
 
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024
+  }
+});
+
 router.get('/', getAllSatwa);
 router.get('/:id', getSatwaById);
 router.get('/v2/:id', getSatwaByIdV2);
-router.post('/', addSatwa);
-router.put('/:id', updateSatwa);
+router.post('/', multer.single('gambar_lokasi'), addSatwa);
+router.put('/:id', multer.single('gambar_lokasi'), updateSatwa);
 router.delete('/:id', deleteSatwa);
 
 module.exports = router;

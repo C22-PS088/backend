@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     lokasi: {
       type: DataTypes.STRING
     },
+    gambar_lokasi: {
+      type: DataTypes.STRING
+    },
     populasi: {
       type: DataTypes.STRING
     },
