@@ -13,6 +13,7 @@ var userRouter = require('./routes/user');
 var satwaDonasiRouter = require('./routes/satwaDonasi');
 var satwaGambarRouter = require('./routes/satwaGambar');
 var predictRouter = require('./routes/predict');
+var transaksiRouter = require('./routes/transaksi');
 
 var app = express();
 
@@ -46,5 +47,6 @@ app.use('/user', userRouter);
 app.use('/satwa-donasi', satwaDonasiRouter);
 app.use('/satwa-gambar', satwaGambarRouter);
 app.use('/predict', predictRouter);
+app.use('/transaksi', transaksiRouter);
 
 module.exports = app;
