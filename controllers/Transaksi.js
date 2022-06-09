@@ -31,8 +31,8 @@ const getTransaksi = async (req, res) => {
       donasi: transaksi.Donasi.nama,
       email: transaksi.email,
       gross_amount: JSON.parse(transaksi.midtrans_response).gross_amount,
-      transaction_time: transaction_time.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
-      transaction_expired: transaction_expired.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
+      transaction_time: transaction_time.toLocaleString('en-US'),
+      transaction_expired: transaction_expired.toLocaleString('en-US'),
       transaction_status: JSON.parse(transaksi.midtrans_response).transaction_status,
       bank: JSON.parse(transaksi.midtrans_response).va_numbers[0].bank,
       va_number: JSON.parse(transaksi.midtrans_response).va_numbers[0].va_number
@@ -63,8 +63,8 @@ const getTransaksiByEmail = async (req, res) => {
       donasi: transaksi.Donasi.nama,
       email: transaksi.email,
       gross_amount: JSON.parse(transaksi.midtrans_response).gross_amount,
-      transaction_time: transaction_time.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
-      transaction_expired: transaction_expired.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
+      transaction_time: transaction_time.toLocaleString('en-US'),
+      transaction_expired: transaction_expired.toLocaleString('en-US'),
       transaction_status: JSON.parse(transaksi.midtrans_response).transaction_status,
       bank: JSON.parse(transaksi.midtrans_response).va_numbers[0].bank,
       va_number: JSON.parse(transaksi.midtrans_response).va_numbers[0].va_number
@@ -112,8 +112,8 @@ const getTransaksiStatus = async (req, res) => {
       donasi: transaksi.Donasi.nama,
       email: transaksi.email,
       gross_amount: JSON.parse(transaksi.midtrans_response).gross_amount,
-      transaction_time: transaction_time.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
-      transaction_expired: transaction_expired.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
+      transaction_time: transaction_time.toLocaleString('en-US'),
+      transaction_expired: transaction_expired.toLocaleString('en-US'),
       transaction_status: JSON.parse(transaksi.midtrans_response).transaction_status,
       bank: JSON.parse(transaksi.midtrans_response).va_numbers[0].bank,
       va_number: JSON.parse(transaksi.midtrans_response).va_numbers[0].va_number
@@ -214,8 +214,8 @@ const addTransaksi = async (req, res) => {
       donasi: donasi.nama,
       email: transaksi.email,
       gross_amount: JSON.parse(transaksi.midtrans_response).gross_amount,
-      transaction_time: transaction_time.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
-      transaction_expired: transaction_expired.toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }),
+      transaction_time: transaction_time.toLocaleString('en-US'),
+      transaction_expired: transaction_expired.toLocaleString('en-US'),
       transaction_status: JSON.parse(transaksi.midtrans_response).transaction_status,
       bank: JSON.parse(transaksi.midtrans_response).va_numbers[0].bank,
       va_number: JSON.parse(transaksi.midtrans_response).va_numbers[0].va_number
