@@ -5,8 +5,8 @@ const midtransClient = require('midtrans-client');
 // Create Core API instance
 let coreApi = new midtransClient.CoreApi({
   isProduction: false,
-  serverKey: 'SB-Mid-server-sehcBK0MqfbGYt9Yxsyu2AQk',
-  clientKey: 'SB-Mid-client-baiymt1GVFE8yXr6'
+  serverKey: process.env.MIDTRANS_SERVER_KEY,
+  clientKey: process.env.MIDTRANS_CLIENT_KEY
 });
 
 const uuidv1 = uuid.v1;
