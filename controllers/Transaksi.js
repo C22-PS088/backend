@@ -132,6 +132,20 @@ const getTransaksiStatus = async (req, res) => {
 
 const addTransaksi = async (req, res) => {
   try {
+    const {
+      id,
+      bank,
+      email,
+      nominal
+    } = req.body;
+
+    const formatted_request = {
+      id: parseInt(id),
+      bank: bank,
+      email: email,
+      nominal: parseInt(nominal)
+    }
+
     const schema = {
       id: 'number|integer|positive',
       bank: 'string',
@@ -139,20 +153,13 @@ const addTransaksi = async (req, res) => {
       nominal: 'number|integer|positive',
     }
 
-    const validate = v.validate(req.body, schema);
+    const validate = v.validate(formatted_request, schema);
 
     if (validate.length) {
       return res
         .status(400)
         .json(validate);
     }
-
-    const {
-      id,
-      bank,
-      email,
-      nominal
-    } = req.body;
 
     const donasi = await Donasi.findByPk(id);
 
