@@ -25,5 +25,14 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'transaksi'
   });
 
+  Transaksi.associate = models => {
+    Transaksi.belongsTo(models.Donasi, {
+      foreignKey: {
+        name: 'DonasiId',
+        type: DataTypes.INTEGER,
+      }
+    });
+  };
+
   return Transaksi;
 };

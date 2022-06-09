@@ -46,6 +46,9 @@ module.exports = (sequelize, DataTypes) => {
       through: 'Satwa_donasi',
       foreignkey: 'DonasiId'
     });
+    Donasi.hasMany(models.Transaksi, {
+      foreignKey: 'DonasiId'
+    });
   };
 
   return Donasi;
