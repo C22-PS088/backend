@@ -17,6 +17,9 @@ const v = new Validator();
 
 const getTransaksi = async (req, res) => {
   const transaksi = await Transaksi.findAll({
+    order: [
+      ['createdAt', 'DESC']
+    ],
     include: [{
       model: Donasi
     }]
@@ -49,6 +52,9 @@ const getTransaksiByEmail = async (req, res) => {
     where: {
       email: email
     },
+    order: [
+      ['createdAt', 'DESC']
+    ],
     include: [{
       model: Donasi
     }]
