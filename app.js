@@ -17,7 +17,9 @@ var transaksiRouter = require('./routes/transaksi');
 
 var app = express();
 
-let whitelist = ['http://localhost:3000', 'http://localhost', 'http://35.219.90.56:3000'];
+var whitelisted = process.env.WHITELISTED.split(';');
+
+let whitelist = whitelisted;
 
 app.use(cors({
   credentials: true,
